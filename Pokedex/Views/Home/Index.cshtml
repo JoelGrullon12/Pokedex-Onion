@@ -1,5 +1,9 @@
-﻿
+﻿@using Application.ViewModels.Pokemon
+@using Application.ViewModels.Region
+@using Application.ViewModels.Type
+@model PokemonListViewModel;
 @{
+
     ViewData["Title"] = "Inicio";
 }
 
@@ -26,14 +30,17 @@
             <div class="row no-gutters">
                 <div class="col-lg-6 col-md-3 col-sm-12 p-0"></div>
                 <div class="col-lg-2 col-md-3 col-sm-12 p-0">
-                    <select class="form-control" id="exampleFormControlSelect1">
+                    <select class="form-control" id="region-filter" onchange="filter()">
                         <option>Filtrar por Region</option>
-                        <option>London</option>
+                        @foreach(var region in Model.Regions){
+                            <option value="@region.Id">@region.Name</option>
+                        }
+                        @*<option>London</option>
                         <option>Boston</option>
                         <option>Mumbai</option>
                         <option>New York</option>
                         <option>Toronto</option>
-                        <option>Paris</option>
+                        <option>Paris</option>*@
                     </select>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12 p-0">
@@ -53,81 +60,66 @@
     <h2>Inicio</h2>
 </div>
 
-<div id="pokemons-cards" class="row row-cols-1 row-cols-md-4 g-4">
-  <div class="col">
-    <div class="card">
-      <img src="~/img/pokemons/pikachu.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Pikachu</h5>
-        <p class="card-text"><b>Tipo Principal:</b> Electrico <br />
-        <b>Tipo Secundario: </b>Ni idea we <br />
-            <b>Region: </b>Kanto<br />
-            It's Pikachu :v. Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-            sed do eiusmod. </p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card">
-      <img src="~/img/pokemons/pikachu.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card">
-      <img src="~/img/pokemons/pikachu.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card">
-      <img src="~/img/pokemons/pikachu.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card">
-      <img src="~/img/pokemons/pikachu.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card">
-      <img src="~/img/pokemons/pikachu.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card">
-      <img src="~/img/pokemons/pikachu.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card">
-      <img src="~/img/pokemons/pikachu.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-    </div>
-  </div>
+<div id="pokemons-cards" class="row row-cols-1 row-cols-md-3 g-4">
+
+    @if (Model == null || Model.Pokemons.Count == 0)
+    {
+        <h2>No hay Pokemones agregados en la base de datos</h2>
+    }else{
+
+        foreach(PokemonViewModel item in Model.Pokemons)
+        {
+            string type1 = "";
+            string type2 = "";
+            string region = "";
+
+            foreach(TypeViewModel type in Model.Types){
+                if(type.Id == item.PrimaryTypeId)
+                {
+                    type1 = type.Name;
+                }
+
+                if(type.Id == item.SecondaryTypeId)
+                {
+                    type2 = type1 == type.Name ? "Sin tipo secundario" : type.Name;
+                }
+
+                @*type1 = type.Id == item.PrimaryTypeId ? type.Name : "";
+                type2 = type.Id == item.SecondaryTypeId ? type.Name : "";*@
+            }
+
+            foreach(RegionViewModel regionitem in Model.Regions)
+            {
+                if(regionitem.Id == item.RegionId)
+                {
+                    region = regionitem.Name;
+                }
+                @*region = regionitem.Id == item.RegionId ? regionitem.Name : "";*@
+            }
+
+          <div class="col">
+          <div class="card shadow-sm">
+            <img class="bd-placeholder-img card-img-top" src="@item.ImgUrl"/>
+
+            <div class="card-body">
+                <h5 class="card-title">@item.Name</h5>
+              <p class="card-text"><b>Tipo Principal: </b>@type1<br />
+                <b>Tipo Secundario: </b>@type2 <br />
+                    @item.Description </p>
+              <div class="d-flex justify-content-between align-items-center">
+                @*<div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>*@
+                <small class="text-muted">@region</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        }
+    }
+
 </div>
+
+<script type="text/javascript" src="~/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="~/js/Home.js"></script>

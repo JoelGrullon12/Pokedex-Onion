@@ -1,92 +1,74 @@
-﻿
+﻿@using Application.ViewModels.Pokemon
+@using Application.ViewModels.Region
+@using Application.ViewModels.Type
+@model PokemonListViewModel;
 @{
     ViewData["Title"] = "Pokemones";
 }
 
-<div class="row" style="margin:15px;">
-    <h2>
+<div class="row mb-3">
+    <h2 class="col-3">
         Pokemones
     </h2>
+    <div class="col-3 offset-6">
+        <a class="btn btn-outline-success" asp-controller="Pokemons" asp-action="Create">Añadir Pokemon</a>
+    </div>
 </div>
 
 <div id="pokemons-cards" class="row row-cols-1 row-cols-md-3 g-4">
-  <div class="col">
-    <div class="card">
-      <img src="~/img/pokemons/pikachu.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Pikachu</h5>
-        <p class="card-text"><b>Tipo Principal:</b> Electrico <br />
-        <b>Tipo Secundario: </b>Ni idea we <br />
-            <b>Region: </b>Kanto<br />
-            It's Pikachu :v. Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-            sed do eiusmod. </p>
 
-            <a asp-controller="Pokemons" asp-action="Edit" class="btn btn-primary">Editar</a>
-            <button class="btn btn-danger">Eliminar</button>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card">
-      <img src="~/img/pokemons/pikachu.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card">
-      <img src="~/img/pokemons/pikachu.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card">
-      <img src="~/img/pokemons/pikachu.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card">
-      <img src="~/img/pokemons/pikachu.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card">
-      <img src="~/img/pokemons/pikachu.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card">
-      <img src="~/img/pokemons/pikachu.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card">
-      <img src="~/img/pokemons/pikachu.jpg" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-    </div>
-  </div>
+
+     @if (Model == null || Model.Pokemons.Count == 0)
+    {
+        <h2>No hay Pokemones agregados en la base de datos</h2>
+    }else{
+
+        @foreach(PokemonViewModel item in Model.Pokemons)
+        {
+            string type1 = "";
+            string type2 = "";
+            string region = "";
+
+            foreach(TypeViewModel type in Model.Types){
+                if(type.Id == item.PrimaryTypeId)
+                {
+                    type1 = type.Name;
+                }
+
+                if(type.Id == item.SecondaryTypeId)
+                {
+                    type2 = type1 == type.Name ? "Sin tipo secundario" : type.Name;
+                }
+            }
+
+            foreach(RegionViewModel regionitem in Model.Regions)
+            {
+                if(regionitem.Id == item.RegionId)
+                {
+                    region = regionitem.Name;
+                }
+            }
+
+          <div class="col">
+          <div class="card shadow-sm">
+            <img class="bd-placeholder-img card-img-top" src="@item.ImgUrl"/>
+
+            <div class="card-body">
+                <h5 class="card-title">@item.Name</h5>
+              <p class="card-text"><b>Tipo Principal: </b>@type1<br />
+                <b>Tipo Secundario: </b>@type2 <br />
+                    @item.Description </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a asp-controller="Pokemons" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info">Editar</a>
+                  <a asp-controller="Pokemons" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                </div>
+                <small class="text-muted">@region</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        }
+    }
+  
 </div>

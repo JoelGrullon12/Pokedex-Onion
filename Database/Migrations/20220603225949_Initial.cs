@@ -26,9 +26,7 @@ namespace Database.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ImgUrl = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -45,7 +43,7 @@ namespace Database.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ImgUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PrimaryType = table.Column<int>(type: "int", nullable: false),
-                    SecondaryType = table.Column<int>(type: "int", nullable: false),
+                    SecondaryType = table.Column<int>(type: "int", nullable: true),
                     RegionId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

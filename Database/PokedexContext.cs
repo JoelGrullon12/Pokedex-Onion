@@ -47,8 +47,7 @@ namespace Database
             modelBuilder.Entity<PokemonType>()
                 .HasMany<Pokemon>(type => type.SecPokemons)
                 .WithOne(pokemon => pokemon.SecTypes)
-                .HasForeignKey(pokemon => pokemon.SecondaryType)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey(pokemon => pokemon.SecondaryType);
 
             modelBuilder.Entity<Region>()
                 .HasMany<Pokemon>(region => region.Pokemons)
@@ -64,13 +63,14 @@ namespace Database
             modelBuilder.Entity<Pokemon>().Property(pokemon => pokemon.Description).IsRequired();
             modelBuilder.Entity<Pokemon>().Property(pokemon => pokemon.ImgUrl).IsRequired();
             modelBuilder.Entity<Pokemon>().Property(pokemon => pokemon.PrimaryType).IsRequired();
+            modelBuilder.Entity<Pokemon>().Property(pokemon => pokemon.SecondaryType);
             modelBuilder.Entity<Pokemon>().Property(pokemon => pokemon.RegionId).IsRequired();
             #endregion
 
             #region types
             modelBuilder.Entity<PokemonType>().Property(pokemon => pokemon.Name).IsRequired();
-            modelBuilder.Entity<PokemonType>().Property(pokemon => pokemon.Description).IsRequired();
-            modelBuilder.Entity<PokemonType>().Property(pokemon => pokemon.ImgUrl).IsRequired();
+            //modelBuilder.Entity<PokemonType>().Property(pokemon => pokemon.Description).IsRequired();
+            //modelBuilder.Entity<PokemonType>().Property(pokemon => pokemon.ImgUrl).IsRequired();
             #endregion
 
             #region regions

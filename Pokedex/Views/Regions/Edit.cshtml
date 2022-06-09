@@ -1,0 +1,30 @@
+﻿@using Application.ViewModels.Region
+@model RegionViewModel
+@{
+    ViewData["Title"] = "Editar Region";
+}
+
+<div class="card col-md-10 offset-1">
+  <div class="card-header">
+    <h4>Editar Region</h4>
+  </div>
+  <div class="card-body">
+    <form method="post" asp-controller="Regions" asp-action="Edit">
+
+      <div class="mb-3">
+        <label for="pokemon-name" class="form-label">Nombre</label>
+        <input asp-for="@Model.Name" type="text" class="form-control" id="pokemon-name">
+      </div>
+
+     <div class="mb-3">
+          <div class="form-floating">
+            <textarea class="form-control" asp-for="@Model.Description" placeholder="Inserte una descripcion" id="floatingTextarea" style="height: 150px;"></textarea>
+            <label for="floatingTextarea">Descripcion</label>
+          </div>
+      </div>
+      
+      <a asp-controller="Regions" asp-action="Index" class="btn btn-warning">Volver</a>
+      <button type="submit" class="btn btn-success">Terminar Edicion</button>
+    </form>
+  </div>
+</div>

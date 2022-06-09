@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewData["Title"] = "Editar Pokemon";
+}
+
+<div class="card col-md-10 offset-1">
+  <div class="card-header">
+    <h4>Editar Pokemon</h4>
+  </div>
+  <div class="card-body">
+    <form>
+       <div class="mb-3">
+        <label class="form-label">Imagen</label><br />
+        <button style="border: none;"><img src="~/img/pokemons/pikachu.jpg" class="img-fluid" style="max-height: 200px; "></button>
+        <input type="text" value="/img/pokemons/pikachu.jpg" class="form-control" id="img-src" readonly>
+      </div>
+
+      <div class="mb-3">
+        <label for="pokemon-name" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="pokemon-name">
+      </div>
+
+      <div class="mb-3">
+        <label for="main-type" class="form-label">Tipo Principal</label>
+        <select class="form-select" id="main-type">
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div> 
+
+      <div class="mb-3">
+        <label for="secundary-type" class="form-label">Tipo Secundario</label>
+        <select class="form-select" id="secundary-type">
+          <option value="0">Sin tipo secundario</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div> 
+
+      <div class="mb-3">
+        <label for="region" class="form-label">Region</label>
+        <select class="form-select" id="region">
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div> 
+      
+      <a asp-controller="Pokemons" asp-action="Index" class="btn btn-warning">Volver</a>
+      <button type="submit" class="btn btn-success">Terminar Edicion</button>
+    </form>
+  </div>
+</div>
