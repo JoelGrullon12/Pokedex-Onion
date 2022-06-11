@@ -5,7 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Database\Database.csproj" />
+    <Folder Include="Common\" />
+    <Folder Include="Settings\" />
   </ItemGroup>
 
 </Project>

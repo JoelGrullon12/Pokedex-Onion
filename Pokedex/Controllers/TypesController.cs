@@ -1,19 +1,20 @@
-﻿using Application.Enums;
-using Application.Service;
-using Application.ViewModels.Type;
-using Database;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Pokedex.Core.Application.Enums;
+using Pokedex.Core.Application.Interfaces.Services;
+using Pokedex.Core.Application.Service;
+using Pokedex.Core.Application.ViewModels.Type;
+using Pokedex.Infrastructure.Persistence.Contexts;
 using System.Threading.Tasks;
 
 namespace Pokedex.Controllers
 {
     public class TypesController : Controller
     {
-        private readonly TypeService _typeService;
+        private readonly ITypeService _typeService;
 
-        public TypesController(PokedexContext dbContext)
+        public TypesController(ITypeService typeService)
         {
-            _typeService = new(dbContext);
+            _typeService = typeService;
         }
 
         public async Task<IActionResult> Index()

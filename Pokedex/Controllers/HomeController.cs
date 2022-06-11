@@ -1,7 +1,8 @@
-﻿using Application.Service;
-using Application.ViewModels.Pokemon;
-using Database;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Pokedex.Core.Application.Interfaces.Services;
+using Pokedex.Core.Application.Service;
+using Pokedex.Core.Application.ViewModels.Pokemon;
+using Pokedex.Infrastructure.Persistence.Contexts;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -9,16 +10,16 @@ namespace Pokedex.Controllers
 {
     public class HomeController : Controller { 
     
-        private readonly PokemonService _pokemonService;
-        private readonly TypeService _typeService;
-        private readonly RegionService _regionService;
+        private readonly IPokemonService _pokemonService;
+        private readonly ITypeService _typeService;
+        private readonly IRegionService _regionService;
         private readonly PokemonListViewModel _pokemonList;
 
-        public HomeController(PokedexContext dbContext)
+        public HomeController(IPokemonService pokemonService, ITypeService typeService, IRegionService regionService)
         {
-            _pokemonService = new(dbContext);
-            _typeService = new(dbContext);
-            _regionService = new(dbContext);
+            _pokemonService = pokemonService;
+            _typeService = typeService;
+            _regionService = regionService;
             _pokemonList = new();
         }
 
@@ -54,7 +55,7 @@ namespace Pokedex.Controllers
                 List<PokemonViewModel> pokemon = new(_pokemonList.Pokemons);
                 foreach (PokemonViewModel i in pokemon)
                 {
-                    if (!i.Name.Contains(name))
+                    if (!i.Name.ToLower().Contains(name.ToLower()))
                         _pokemonList.Pokemons.Remove(i);
 
                     ViewData["name"] = name;

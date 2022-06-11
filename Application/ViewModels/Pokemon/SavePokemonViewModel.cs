@@ -1,12 +1,12 @@
-﻿using Application.ViewModels.Region;
-using Application.ViewModels.Type;
+﻿using Pokedex.Core.Application.ViewModels.Region;
+using Pokedex.Core.Application.ViewModels.Type;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.ViewModels.Pokemon
+namespace Pokedex.Core.Application.ViewModels.Pokemon
 {
     public class SavePokemonViewModel
     {

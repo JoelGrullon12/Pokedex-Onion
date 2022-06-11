@@ -1,15 +1,13 @@
-﻿using Database;
-using Database.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Pokedex.Core.Application.Interfaces.Repositories;
+using Pokedex.Core.Domain.Entities;
+using Pokedex.Infrastructure.Persistence.Contexts;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Application.Repository
 {
-    public class PokemonRepository
+    public class PokemonRepository:IPokemonRepository
     {
         private readonly PokedexContext _dbcontext;
 

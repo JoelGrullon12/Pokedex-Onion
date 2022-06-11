@@ -1,23 +1,23 @@
-﻿using Application.Enums;
-using Application.Repository;
-using Application.ViewModels.Region;
-using Database;
-using Database.Models;
+﻿using Pokedex.Core.Application.Enums;
+using Pokedex.Core.Application.Interfaces.Repositories;
+using Pokedex.Core.Application.Interfaces.Services;
+using Pokedex.Core.Application.ViewModels.Region;
+using Pokedex.Core.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Service
+namespace Pokedex.Core.Application.Service
 {
-    public class RegionService
+    public class RegionService : IRegionService
     {
-        private readonly RegionRepository _regionRepository;
+        private readonly IRegionRepository _regionRepository;
 
-        public RegionService(PokedexContext dbContext)
+        public RegionService(IRegionRepository regionRepository)
         {
-            _regionRepository = new RegionRepository(dbContext);
+            _regionRepository = regionRepository;
         }
 
         public async Task<List<RegionViewModel>> GetAllViewModel()

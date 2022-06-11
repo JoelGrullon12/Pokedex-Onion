@@ -1,28 +1,30 @@
-﻿using Application.Service;
-using Application.Enums;
-using Application.ViewModels.Pokemon;
-using Database;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Pokedex.Infrastructure.Persistence.Contexts;
+using Pokedex.Core.Application.Enums;
+using Pokedex.Core.Application.Service;
+using Pokedex.Core.Application.Interfaces.Services;
+using Pokedex.Core.Application.ViewModels.Pokemon;
 
 namespace Pokedex.Controllers
 {
     public class PokemonsController : Controller
     {
         //Services
-        private readonly PokemonService _pokemonService;
-        private readonly TypeService _typeService;
-        private readonly RegionService _regionService;
+        private readonly IPokemonService _pokemonService;
+        private readonly ITypeService _typeService;
+        private readonly IRegionService _regionService;
 
         //ViewModels
         private readonly PokemonListViewModel _pokemonList;
         private readonly SavePokemonViewModel _savePokemon;
 
-        public PokemonsController(PokedexContext dbContext)
+        public PokemonsController(IPokemonService pokemonService, 
+            ITypeService typeService, IRegionService regionService)
         {
-            _pokemonService = new(dbContext);
-            _typeService = new(dbContext);
-            _regionService = new(dbContext);
+            _pokemonService = pokemonService;
+            _typeService = typeService;
+            _regionService = regionService;
             _pokemonList = new();
             _savePokemon = new();
         }

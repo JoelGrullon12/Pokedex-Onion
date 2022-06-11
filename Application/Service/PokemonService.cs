@@ -1,23 +1,23 @@
-﻿using Application.Enums;
-using Application.Repository;
-using Application.ViewModels.Pokemon;
-using Database;
-using Database.Models;
+﻿using Pokedex.Core.Application.Enums;
+using Pokedex.Core.Application.Interfaces.Repositories;
+using Pokedex.Core.Application.Interfaces.Services;
+using Pokedex.Core.Application.ViewModels.Pokemon;
+using Pokedex.Core.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Service
+namespace Pokedex.Core.Application.Service
 {
-    public class PokemonService
+    public class PokemonService : IPokemonService
     {
-        private readonly PokemonRepository _pokemonRepository;
+        private readonly IPokemonRepository _pokemonRepository;
 
-        public PokemonService(PokedexContext dbContext)
+        public PokemonService(IPokemonRepository pokemonRepository)
         {
-            _pokemonRepository = new PokemonRepository(dbContext);
+            _pokemonRepository = pokemonRepository;
         }
 
         public async Task<List<PokemonViewModel>> GetAllViewModel()

@@ -1,12 +1,12 @@
-﻿using Database.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Pokedex.Core.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Database
+namespace Pokedex.Infrastructure.Persistence.Contexts
 {
     public class PokedexContext : DbContext
     {
@@ -17,7 +17,7 @@ namespace Database
 
         public DbSet<Pokemon> Pokemons { get; set; }
         public DbSet<PokemonType> Types { get; set; }
-        public DbSet<Region> Regions{ get; set; }
+        public DbSet<Region> Regions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -30,9 +30,9 @@ namespace Database
             #endregion
 
             #region keys
-            modelBuilder.Entity<Pokemon>().HasKey(pokemon=>pokemon.Id);
-            modelBuilder.Entity<PokemonType>().HasKey(type=>type.Id);
-            modelBuilder.Entity<Region>().HasKey(region=>region.Id);
+            modelBuilder.Entity<Pokemon>().HasKey(pokemon => pokemon.Id);
+            modelBuilder.Entity<PokemonType>().HasKey(type => type.Id);
+            modelBuilder.Entity<Region>().HasKey(region => region.Id);
             #endregion
 
             #region relations

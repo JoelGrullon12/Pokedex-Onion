@@ -1,8 +1,9 @@
-﻿using Application.Enums;
-using Application.Service;
-using Application.ViewModels.Region;
-using Database;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Pokedex.Core.Application.Enums;
+using Pokedex.Core.Application.Interfaces.Services;
+using Pokedex.Core.Application.Service;
+using Pokedex.Core.Application.ViewModels.Region;
+using Pokedex.Infrastructure.Persistence.Contexts;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -10,13 +11,11 @@ namespace Pokedex.Controllers
 {
     public class RegionsController : Controller
     {
-        private readonly RegionService _regionService;
+        private readonly IRegionService _regionService;
 
-
-
-        public RegionsController(PokedexContext dbContext)
+        public RegionsController(IRegionService regionService)
         {
-            _regionService = new(dbContext);
+            _regionService = regionService;
         }
 
         public async Task<IActionResult> Index()

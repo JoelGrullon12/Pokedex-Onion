@@ -5,16 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.ViewModels.Pokemon
+namespace Pokedex.Core.Application.ViewModels.Pokemon
 {
     public class PokemonViewModel
     {
         public int Id { get; set; }
-        [Required(ErrorMessage="Debe colocar el nombre del Pokemon")]
+        [Required(ErrorMessage = "Debe colocar el nombre del Pokemon")]
         public string Name { get; set; }
-        [Required(ErrorMessage="Debe colocarle una descripcion al Pokemon")]
+        [Required(ErrorMessage = "Debe colocarle una descripcion al Pokemon")]
         public string Description { get; set; }
-        [Required(ErrorMessage="Debe colocar el link de una imagen online para el Pokemon")]
+        [Required(ErrorMessage = "Debe colocar el link de una imagen online para el Pokemon")]
         public string ImgUrl { get; set; }
         public int PrimaryTypeId { get; set; }
         public int SecondaryTypeId { get; set; }

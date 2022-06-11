@@ -1,6 +1,6 @@
-﻿@using Application.ViewModels.Pokemon
-@using Application.ViewModels.Region
-@using Application.ViewModels.Type
+﻿@using Pokedex.Core.Application.ViewModels.Pokemon
+@using Pokedex.Core.Application.ViewModels.Region
+@using Pokedex.Core.Application.ViewModels.Type
 @model PokemonListViewModel;
 @{
 
@@ -49,7 +49,7 @@
 
     @if (Model == null || Model.Pokemons.Count == 0)
     {
-        if(regionid==0){
+        if(regionid==0 || namesearch=="" || namesearch==null){
             <h2>No hay Pokemones agregados en la base de datos</h2>
         }
         else
