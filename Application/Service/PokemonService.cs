@@ -37,16 +37,16 @@ namespace Application.Service
 
         public async Task<PokemonViewModel> GetByIdViewModel(int id)
         {
-            var pokemonList = await _pokemonRepository.GetByIdAsync(id);
-            PokemonViewModel pokemon = new();
-            pokemon.Id = pokemonList.Id;
-            pokemon.Name = pokemonList.Name;
-            pokemon.Description = pokemonList.Description;
-            pokemon.PrimaryTypeId = pokemonList.PrimaryType;
-            pokemon.SecondaryTypeId = pokemonList.SecondaryType;
-            pokemon.RegionId = pokemonList.RegionId;
-            pokemon.ImgUrl = pokemonList.ImgUrl;
-            return pokemon;
+            var pokemon = await _pokemonRepository.GetByIdAsync(id);
+            PokemonViewModel vm = new();
+            vm.Id = pokemon.Id;
+            vm.Name = pokemon.Name;
+            vm.Description = pokemon.Description;
+            vm.PrimaryTypeId = pokemon.PrimaryType;
+            vm.SecondaryTypeId = pokemon.SecondaryType;
+            vm.RegionId = pokemon.RegionId;
+            vm.ImgUrl = pokemon.ImgUrl;
+            return vm;
         }
 
         public async Task DML(PokemonViewModel vm, DMLAction action)

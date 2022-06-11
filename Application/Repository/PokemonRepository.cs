@@ -45,5 +45,10 @@ namespace Application.Repository
         {
             return await _dbcontext.Set<Pokemon>().FindAsync(id);
         }
+
+        //public async Task<List<Pokemon>> GetByRegionAsync(int idRegion)
+        //{
+        //    return await _dbcontext.FindAsync<Pokemon>()
+        //}
     }
 }

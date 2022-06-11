@@ -19,15 +19,10 @@
                 <input type="text" asp-for="@Model.Pokemon.ImgUrl" class="form-control" id="img-src" oninput="buscarImg()">
             </div>
         </div>
-       @*<div class="mb-3">
-        <label class="form-label">Imagen</label><br />
-        <button id="img-show" style="border: none;"><img src="~/img/camera.png" class="img-fluid" style="margin:auto; max-height: 200px; "></button>
-        <input type="text" value="" class="form-control" id="img-src" oninput="buscarImg()">
-      </div>*@
 
       <div class="mb-3">
-        <label for="pokemon-name" class="form-label">Nombre</label>
-        <input type="text" asp-for="@Model.Pokemon.Name" class="form-control" id="pokemon-name">
+        <label asp-for="@Model.Pokemon.Name" class="form-label">Nombre</label>
+        <input type="text" asp-for="@Model.Pokemon.Name" class="form-control">
       </div>
 
       <div class="mb-3">

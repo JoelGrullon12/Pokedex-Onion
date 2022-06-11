@@ -1,7 +1,24 @@
-﻿
+﻿@using Application.ViewModels.Type
+@model TypeViewModel
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Agregar Tipo";
 }
 
-<h1>Create</h1>
 
+<div class="card col-md-10 offset-1">
+  <div class="card-header">
+    <h4>Agregar Tipo</h4>
+  </div>
+  <div class="card-body">
+    <form method="post" asp-controller="Types" asp-action="Create">
+        
+      <div class="mb-3">
+        <label asp-for="@Model.Name" class="form-label">Nombre</label>
+        <input type="text" asp-for="@Model.Name" class="form-control">
+      </div>
+
+      <a asp-controller="Types" asp-action="Index" class="btn btn-warning">Volver</a>
+      <input type="submit" class="btn btn-success" value="Guardar">
+    </form>
+  </div>
+</div>

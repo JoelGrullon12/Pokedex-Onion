@@ -26,13 +26,13 @@
       </div>*@
 
       <div class="mb-3">
-        <label for="pokemon-name" class="form-label">Nombre</label>
-        <input type="text" asp-for="@Model.Pokemon.Name" class="form-control" id="pokemon-name">
+        <label asp-for="@Model.Pokemon.Name" class="form-label">Nombre</label>
+        <input type="text" asp-for="@Model.Pokemon.Name" class="form-control" >
       </div>
 
       <div class="mb-3">
           <div class="form-floating">
-            <textarea class="form-control" asp-for="@Model.Pokemon.Description" placeholder="Inserte una descripcion" id="floatingTextarea" style="height: 200px;"></textarea>
+            <textarea class="form-control" asp-for="@Model.Pokemon.Description" placeholder="Inserte una descripcion" style="height: 150px;"></textarea>
             <label for="floatingTextarea">Descripcion</label>
           </div>
       </div>

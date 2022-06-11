@@ -5,46 +5,31 @@
 @{
 
     ViewData["Title"] = "Inicio";
+    int regionid = Convert.ToInt32(ViewData["region"]);
+    string namesearch = ViewData["name"] == null ? "" : ViewData["name"].ToString();
 }
 
-@*<div class="input-group mb-3">
-    <div class="col-md-2">
-  <select class="form-select " id="inputGroupSelect04" aria-label="Example select with button addon">
-    <option selected>Choose...</option>
-    <option value="1">One</option>
-    <option value="2">Two</option>
-    <option value="3">Three</option>
-  </select>
-  </div>
-  <div class="col-md-4">
-  <input type="text" class="form-control col-md-4" placeholder="Recipient's username" aria-label="Recipient's username" >
-  </div>
-  <div class="col-md-1">
-  <button class="btn btn-outline-secondary" type="button" id="button-addon2">Buscar</button>
-  </div>
-</div>*@
-
-<form id="search-form" asp-controller="Home" asp-action="Index">
+<form method="get" id="search-form" asp-controller="Home" asp-action="Index">
     <div class="row" id="search-bar" asp-for="Search">
         <div class="col-12">
             <div class="row no-gutters">
                 <div class="col-lg-6 col-md-3 col-sm-12 p-0"></div>
                 <div class="col-lg-2 col-md-3 col-sm-12 p-0">
-                    <select class="form-control" id="region-filter" onchange="filter()">
-                        <option>Filtrar por Region</option>
+                    <select name="region" class="form-control" id="region-filter" onchange="filter()">
+                        <option value="0">Sin filtro de region</option>
                         @foreach(var region in Model.Regions){
-                            <option value="@region.Id">@region.Name</option>
+                            @if (region.Id == regionid)
+                            {
+                                <option value="@region.Id" selected>@region.Name</option>
+                            }else{
+                                <option value="@region.Id">@region.Name</option>
+                            }
+                            
                         }
-                        @*<option>London</option>
-                        <option>Boston</option>
-                        <option>Mumbai</option>
-                        <option>New York</option>
-                        <option>Toronto</option>
-                        <option>Paris</option>*@
                     </select>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12 p-0">
-                    <input type="text" placeholder="Buscar..." class="form-control" id="search">
+                    <input name="name" type="text" placeholder="Buscar..." class="form-control" id="search" value="@namesearch">
                 </div>
                 <div class="col-lg-1 col-md-3 col-sm-12 p-0">
                     <button type="submit" class="btn btn-outline-secondary btn-base">
@@ -64,7 +49,13 @@
 
     @if (Model == null || Model.Pokemons.Count == 0)
     {
-        <h2>No hay Pokemones agregados en la base de datos</h2>
+        if(regionid==0){
+            <h2>No hay Pokemones agregados en la base de datos</h2>
+        }
+        else
+        {
+            <h2>No hay Pokemones correspondientes con los filtros seleccionados</h2>
+        }
     }else{
 
         foreach(PokemonViewModel item in Model.Pokemons)

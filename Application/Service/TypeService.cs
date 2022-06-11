@@ -1,6 +1,8 @@
-﻿using Application.Repository;
+﻿using Application.Enums;
+using Application.Repository;
 using Application.ViewModels.Type;
 using Database;
+using Database.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +38,26 @@ namespace Application.Service
             type.Id = typeList.Id;
             type.Name = typeList.Name;
             return type;
+        }
+
+        public async Task DML(TypeViewModel vm, DMLAction action)
+        {
+            PokemonType type = new();
+            type.Id = vm.Id;
+            type.Name = vm.Name;
+
+            if (action == DMLAction.Add)
+            {
+                await _typeRepository.AddAsync(type);
+            }
+            else if (action == DMLAction.Edit)
+            {
+                await _typeRepository.UpdateAsync(type);
+            }
+            else if (action == DMLAction.Delete)
+            {
+                await _typeRepository.DeleteAsync(type);
+            }
         }
     }
 }

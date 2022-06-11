@@ -12,14 +12,14 @@
     <form method="post" asp-controller="Regions" asp-action="Edit">
 
       <div class="mb-3">
-        <label for="pokemon-name" class="form-label">Nombre</label>
-        <input asp-for="@Model.Name" type="text" class="form-control" id="pokemon-name">
+        <label asp-for="@Model.Name" class="form-label">Nombre</label>
+        <input asp-for="@Model.Name" type="text" class="form-control">
       </div>
 
      <div class="mb-3">
           <div class="form-floating">
-            <textarea class="form-control" asp-for="@Model.Description" placeholder="Inserte una descripcion" id="floatingTextarea" style="height: 150px;"></textarea>
-            <label for="floatingTextarea">Descripcion</label>
+            <textarea class="form-control" asp-for="@Model.Description" placeholder="Inserte una descripcion" style="height: 150px;"></textarea>
+            <label>Descripcion</label>
           </div>
       </div>
       
