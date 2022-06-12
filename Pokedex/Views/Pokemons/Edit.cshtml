@@ -4,6 +4,10 @@
 @model SavePokemonViewModel;
 @{
     ViewData["Title"] = "Editar Pokemon";
+    @if (Model.Pokemon.PrimaryTypeId == Model.Pokemon.SecondaryTypeId)
+    {
+        Model.Pokemon.SecondaryTypeId = 0;
+    }
 }
 
 <div class="card col-md-10 offset-1">
@@ -17,18 +21,21 @@
             <div class="card-body">
                 <h5 class="card-title">Imagen</h5>
                 <input type="text" asp-for="@Model.Pokemon.ImgUrl" class="form-control" id="img-src" oninput="buscarImg()">
+                <span asp-validation-for="Pokemon.ImgUrl" class="text-danger"></span>
             </div>
         </div>
 
       <div class="mb-3">
         <label asp-for="@Model.Pokemon.Name" class="form-label">Nombre</label>
         <input type="text" asp-for="@Model.Pokemon.Name" class="form-control">
+        <span asp-validation-for="Pokemon.Name" class="text-danger"></span>
       </div>
 
       <div class="mb-3">
           <div class="form-floating">
             <textarea class="form-control" asp-for="@Model.Pokemon.Description" placeholder="Inserte una descripcion" id="floatingTextarea" style="height: 200px;"></textarea>
             <label for="floatingTextarea">Descripcion</label>
+            <span asp-validation-for="Pokemon.Description" class="text-danger"></span>
           </div>
       </div>
 
@@ -37,12 +44,6 @@
         <select class="form-select" asp-for="@Model.Pokemon.PrimaryTypeId" id="main-type">
             @foreach(TypeViewModel type in Model.Types)
             {
-                @*@if (diaOld == i)
-                {
-                    <option value="@type.Id" selected>@type.Id</option>
-                }else{
-                    <option value="@type.Id">@type.Id</option>
-                }*@
                 <option value="@type.Id">@type.Name</option>
             }
         </select>
@@ -51,8 +52,8 @@
       <div class="mb-3">
         <label for="secundary-type" class="form-label">Tipo Secundario</label>
         <select class="form-select" asp-for="@Model.Pokemon.SecondaryTypeId" id="secundary-type">
-          <option value="0">Sin tipo secundario</option>
-          @foreach(TypeViewModel type in Model.Types)
+            <option value="0">Sin tipo secundario</option>
+           @foreach(TypeViewModel type in Model.Types)
             {
                 <option value="@type.Id">@type.Name</option>
             }

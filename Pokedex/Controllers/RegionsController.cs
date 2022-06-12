@@ -31,6 +31,9 @@ namespace Pokedex.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(RegionViewModel vm)
         {
+            if (!ModelState.IsValid)
+                return View(vm);
+
             await _regionService.DML(vm, DMLAction.Add);
             return RedirectToRoute(new { controller = "Regions", action = "Index" });
         }
@@ -43,6 +46,9 @@ namespace Pokedex.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(RegionViewModel vm)
         {
+            if (!ModelState.IsValid)
+                return View(vm);
+
             await _regionService.DML(vm, DMLAction.Edit);
             return RedirectToRoute(new { controller = "Regions", action = "Index" });
         }

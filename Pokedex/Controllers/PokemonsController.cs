@@ -47,6 +47,13 @@ namespace Pokedex.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(SavePokemonViewModel vm)
         {
+            if (!ModelState.IsValid)
+            {
+                vm.Types = await _typeService.GetAllViewModel();
+                vm.Regions = await _regionService.GetAllViewModel();
+                return View(vm);
+            }
+
             await _pokemonService.DML(vm.Pokemon, DMLAction.Add);
             return RedirectToRoute(new { controller = "Pokemons", action = "Index" });
         }
@@ -63,6 +70,13 @@ namespace Pokedex.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(SavePokemonViewModel vm)
         {
+            if (!ModelState.IsValid)
+            {
+                vm.Types = await _typeService.GetAllViewModel();
+                vm.Regions = await _regionService.GetAllViewModel();
+                return View(vm);
+            }
+
             await _pokemonService.DML(vm.Pokemon, DMLAction.Edit);
             return RedirectToRoute(new { controller = "Pokemons", action = "Index" });
         }

@@ -30,6 +30,9 @@ namespace Pokedex.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(TypeViewModel vm)
         {
+            if (!ModelState.IsValid)
+                return View(vm);
+
             await _typeService.DML(vm, DMLAction.Add);
             return RedirectToRoute(new { controller = "Types", action = "Index" });
         }
@@ -41,7 +44,10 @@ namespace Pokedex.Controllers
 
         [HttpPost]
         public async Task<IActionResult> Edit(TypeViewModel vm)
-        {
+        {   
+            if (!ModelState.IsValid)
+                return View(vm);
+
             await _typeService.DML(vm, DMLAction.Edit);
             return RedirectToRoute(new { controller = "Types", action = "Index" });
         }
