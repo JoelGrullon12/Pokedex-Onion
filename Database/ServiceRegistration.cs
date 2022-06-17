@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Pokedex.Core.Application.Interfaces.Repositories;
 using Pokedex.Infrastructure.Persistence.Contexts;
+using Pokedex.Infrastructure.Persistence.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,7 @@ namespace Pokedex.Infrastructure.Persistence
             #endregion
 
             #region Repositories
+            services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddTransient<IPokemonRepository, PokemonRepository>();
             services.AddTransient<IRegionRepository, RegionRepository>();
             services.AddTransient<ITypeRepository, TypeRepository>();

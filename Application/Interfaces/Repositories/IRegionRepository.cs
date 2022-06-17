@@ -7,12 +7,8 @@ using System.Threading.Tasks;
 
 namespace Pokedex.Core.Application.Interfaces.Repositories
 {
-    public interface IRegionRepository
+    public interface IRegionRepository:IGenericRepository<Region>
     {
-        Task AddAsync(Region Region);
-        Task UpdateAsync(Region Region);
-        Task DeleteAsync(Region Region);
-        Task<List<Region>> GetAllAsync();
-        Task<Region> GetByIdAsync(int id);
+
     }
 }

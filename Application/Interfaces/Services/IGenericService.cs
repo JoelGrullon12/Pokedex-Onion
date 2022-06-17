@@ -1,5 +1,4 @@
 ﻿using Pokedex.Core.Application.Enums;
-using Pokedex.Core.Application.ViewModels.Region;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +7,12 @@ using System.Threading.Tasks;
 
 namespace Pokedex.Core.Application.Interfaces.Services
 {
-    public interface IRegionService:IGenericService<RegionViewModel, DMLAction>
+    public interface IGenericService<VM,Action> 
+        where VM : class
+        where Action:Enum
     {
-
+        Task<List<VM>> GetAllViewModel();
+        Task<VM> GetByIdViewModel(int id);
+        Task DML(VM vm, DMLAction action);
     }
 }

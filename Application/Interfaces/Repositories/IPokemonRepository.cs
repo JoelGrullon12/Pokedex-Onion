@@ -7,12 +7,8 @@ using System.Threading.Tasks;
 
 namespace Pokedex.Core.Application.Interfaces.Repositories
 {
-    public interface IPokemonRepository
+    public interface IPokemonRepository:IGenericRepository<Pokemon>
     {
-        Task AddAsync(Pokemon pokemon);
-        Task UpdateAsync(Pokemon pokemon);
-        Task DeleteAsync(Pokemon pokemon);
-        Task<List<Pokemon>> GetAllAsync();
-        Task<Pokemon> GetByIdAsync(int id);
+
     }
 }

@@ -2,6 +2,7 @@
 using Pokedex.Core.Application.Interfaces.Repositories;
 using Pokedex.Core.Domain.Entities;
 using Pokedex.Infrastructure.Persistence.Contexts;
+using Pokedex.Infrastructure.Persistence.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,41 +11,13 @@ using System.Threading.Tasks;
 
 namespace Application.Repository
 {
-    public class TypeRepository:ITypeRepository
+    public class TypeRepository : GenericRepository<PokemonType>, ITypeRepository
     {
         private readonly PokedexContext _dbcontext;
 
-        public TypeRepository(PokedexContext dbcontext)
+        public TypeRepository(PokedexContext dbcontext) : base(dbcontext)
         {
             _dbcontext = dbcontext;
-        }
-
-        public async Task AddAsync(PokemonType type)
-        {
-            await _dbcontext.Types.AddAsync(type);
-            await _dbcontext.SaveChangesAsync();
-        }
-
-        public async Task UpdateAsync(PokemonType type)
-        {
-            _dbcontext.Entry(type).State = EntityState.Modified;
-            await _dbcontext.SaveChangesAsync();
-        }
-
-        public async Task DeleteAsync(PokemonType type)
-        {
-            _dbcontext.Set<PokemonType>().Remove(type);
-            await _dbcontext.SaveChangesAsync();
-        }
-
-        public async Task<List<PokemonType>> GetAllAsync()
-        {
-            return await _dbcontext.Set<PokemonType>().ToListAsync();
-        }
-
-        public async Task<PokemonType> GetByIdAsync(int id)
-        {
-            return await _dbcontext.Set<PokemonType>().FindAsync(id);
         }
     }
 }

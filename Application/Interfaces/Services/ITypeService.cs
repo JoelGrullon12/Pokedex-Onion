@@ -8,10 +8,8 @@ using System.Threading.Tasks;
 
 namespace Pokedex.Core.Application.Interfaces.Services
 {
-    public interface ITypeService
+    public interface ITypeService:IGenericService<TypeViewModel, DMLAction>
     {
-        Task<List<TypeViewModel>> GetAllViewModel();
-        Task<TypeViewModel> GetByIdViewModel(int id);
-        Task DML(TypeViewModel vm, DMLAction action);
+
     }
 }
